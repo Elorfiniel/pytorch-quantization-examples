@@ -4,6 +4,8 @@ __pycache__
 # ignore temporary files for training and testing
 data/*
 !data/.gitkeep
+resource/*
+!resource/.gitkeep
 runs/*
 !runs/.gitkeep
 
