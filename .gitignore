@@ -1,0 +1,10 @@
+# ignore python cache
+__pycache__
+
+# ignore temporary scripts and backup files
+*tmp*.py
+*temp*.py
+*.tmp
+*.temp
+*.bck
+*.backup
