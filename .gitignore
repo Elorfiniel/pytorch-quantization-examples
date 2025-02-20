@@ -1,6 +1,12 @@
 # ignore python cache
 __pycache__
 
+# ignore temporary files for training and testing
+data/*
+!data/.gitkeep
+runs/*
+!runs/.gitkeep
+
 # ignore temporary scripts and backup files
 *tmp*.py
 *temp*.py
