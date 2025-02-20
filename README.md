@@ -18,6 +18,8 @@ This repository contains examples of model quantization in PyTorch.
 
 - [Introduction to Quantization on PyTorch](https://pytorch.org/blog/introduction-to-quantization-on-pytorch/#device-and-operator-support)
 
+- [PyTorch Dynamic Quantization](https://leimao.github.io/blog/PyTorch-Dynamic-Quantization/)
+
 - [PyTorch Static Quantization](https://leimao.github.io/blog/PyTorch-Static-Quantization/)
 
 - [PyTorch Quantization Aware Training](https://leimao.github.io/blog/PyTorch-Static-Quantization/)
