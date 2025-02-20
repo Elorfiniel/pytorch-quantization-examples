@@ -15,14 +15,6 @@ def build_config(opts: argparse.Namespace):
   # Default runtime config
   config = ScriptEnv.load_config_dict('configs/default_runtime.py')
 
-  # Loop config
-  config['train_cfg'] = dict(
-    by_epoch=True, max_epochs=opts.max_epochs,
-    val_begin=1, val_interval=1,
-  )
-  config['val_cfg'] = dict(type='ValLoop')
-  config['test_cfg'] = dict(type='TestLoop')
-
   # Optimizer config
   optimizer = dict(type='Adam', lr=1e-3, betas=(0.9, 0.95))
   config['optim_wrapper'] = dict(type='OptimWrapper', optimizer=optimizer)
@@ -67,13 +59,18 @@ def main_procedure(opts: argparse.Namespace):
         num_workers=opts.num_workers,
         shuffle=True,
       ),
+      train_cfg=dict(
+        by_epoch=True, max_epochs=opts.max_epochs,
+        val_begin=1, val_interval=1,
+      ),
       val_dataloader=DataLoader(
         dataset=prepare_dataset(train=False),
         batch_size=opts.batch_size,
         num_workers=opts.num_workers,
         shuffle=False,
       ),
-      val_evaluator=Accuracy(),
+      val_cfg=dict(type='ValLoop'),
+      val_evaluator=dict(type=Accuracy),
       **config,
     )
     runner.train()
@@ -87,7 +84,8 @@ def main_procedure(opts: argparse.Namespace):
         num_workers=opts.num_workers,
         shuffle=False,
       ),
-      test_evaluator=Accuracy(),
+      test_evaluator=dict(type=Accuracy),
+      test_cfg=dict(type='TestLoop'),
       **config,
     )
     runner.test()

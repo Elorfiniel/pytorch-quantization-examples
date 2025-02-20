@@ -13,7 +13,7 @@ def prepare_dataset(train: bool = True):
 
   if train:
     transform = transforms.Compose([
-      transforms.RandomCrop(32, padding=4),
+      transforms.RandomResizedCrop(32, scale=(0.8, 1.0)),
       transforms.RandomRotation(30),
       transforms.RandomHorizontalFlip(),
       transforms.ColorJitter(0.4, 0.2, 0.2, 0.2),

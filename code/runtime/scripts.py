@@ -58,12 +58,12 @@ class ScriptEnv:
   @staticmethod
   def resource_path(resource: str):
     '''Build resource path by prepending the resource folder.'''
-    return osp.join(ScriptEnv.ROOT, 'resource', resource)
+    return osp.join(ScriptEnv.WORKSPACE, 'resource', resource)
 
   @staticmethod
   def data_path(dataset: str):
     '''Build data path by prepending the data folder.'''
-    return osp.join(ScriptEnv.ROOT, 'data', dataset)
+    return osp.join(ScriptEnv.WORKSPACE, 'data', dataset)
 
   @staticmethod
   def load_config_dict(config_path: str):

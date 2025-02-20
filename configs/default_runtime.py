@@ -4,15 +4,14 @@ env_cfg = dict(
   mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0),
   dist_cfg=dict(backend='nccl'),
 )
-randomness = dict(seed=0, deterministic=True)
+randomness = dict(seed=0)
 
-vis_backends = [
-  dict(type='LocalVisBackend'),
-  dict(type='TensorboardVisBackend'),
-]
 visualizer = dict(
   type='Visualizer',
-  vis_backends=vis_backends,
+  vis_backends=[
+    dict(type='LocalVisBackend'),
+    dict(type='TensorboardVisBackend'),
+  ],
   name='visualizer',
 )
 
