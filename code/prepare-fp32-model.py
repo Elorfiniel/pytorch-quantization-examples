@@ -36,8 +36,9 @@ def build_config(opts: argparse.Namespace):
       save_last=False,
     ),
   ]
-  if opts.ema:
-    config['custom_hooks'].append(dict(type='EMAHook'))
+  if opts.ema_epoch in range(opts.max_epochs):
+    ema_hook = dict(type='EMAHook', begin_epoch=opts.ema_epoch)
+    config['custom_hooks'].append(ema_hook)
 
   return Config(config)
 
@@ -127,8 +128,8 @@ if __name__ == '__main__':
   )
 
   config_group.add_argument(
-    '--ema', action='store_true', default=False,
-    help='enable exponential moving average.',
+    '--ema-epoch', type=int, default=-1,
+    help='begin epoch of exponential moving average.',
   )
 
   opts, _ = ScriptOptions(parser).parse_args()
