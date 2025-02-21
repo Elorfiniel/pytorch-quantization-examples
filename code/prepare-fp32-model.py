@@ -1,8 +1,8 @@
 from runtime.dataset import prepare_dataset
 from runtime.metric import Accuracy
-from runtime.model import ModelWrapper
+from runtime.model import prepare_wrapped_model
 from runtime.scripts import ScriptEnv, ScriptOptions
-from torchvision.models import resnet18
+
 from torch.utils.data import DataLoader
 
 from mmengine.config import Config
@@ -50,10 +50,10 @@ def main_procedure(opts: argparse.Namespace):
   ScriptEnv.merge_config(config, opts)
   config = config.to_dict()
 
-  model_wrapper = ModelWrapper(model=resnet18(num_classes=10))
+  wrapped_model = prepare_wrapped_model('resnet18')
   if opts.mode == 'train':
     runner = Runner(
-      model=model_wrapper,
+      model=wrapped_model,
       train_dataloader=DataLoader(
         dataset=prepare_dataset(train=True),
         batch_size=opts.batch_size,
@@ -78,7 +78,7 @@ def main_procedure(opts: argparse.Namespace):
 
   if opts.mode == 'test':
     runner = Runner(
-      model=model_wrapper,
+      model=wrapped_model,
       test_dataloader=DataLoader(
         dataset=prepare_dataset(train=False),
         batch_size=opts.batch_size,

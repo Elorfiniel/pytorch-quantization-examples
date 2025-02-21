@@ -13,3 +13,16 @@ class Accuracy(BaseMetric):
     n_correct = sum([x['n_correct'] for x in results])
     n_samples = sum([x['n_samples'] for x in results])
     return dict(accuracy=100.0 * n_correct / n_samples)
+
+
+class AverageMeter:
+  def __init__(self):
+    self.count = 0
+    self.total = 0
+
+  def update(self, value: float):
+    self.count += 1
+    self.total += value
+
+  def result(self):
+    return self.total / self.count
