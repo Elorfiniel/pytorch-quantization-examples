@@ -2,6 +2,15 @@
 
 This repository contains examples of model quantization in PyTorch.
 
+# Model Comparison
+
+The table below summarizes the results of model accuracy and inference time.
+
+| Model    | Dtype   |   Model Accuracy |   Inference Time |
+|----------|---------|------------------|------------------|
+| origin   | fp32    |           81.36% |          10.38ms |
+| ptq-d    | int8    |           81.36% |          10.77ms |
+
 # Recommended Reading
 
 1. For a brief introduction to model quantization, and the recommendations on quantization configs, check out this PyTorch blog post: [Practical Quantization in PyTorch](https://pytorch.org/blog/quantization-in-practice/).

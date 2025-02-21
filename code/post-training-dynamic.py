@@ -5,7 +5,7 @@
 
 from runtime.benchmark import run_benchmark
 from runtime.dataset import prepare_dataset
-from runtime.model import load_parameters, prepare_wrapped_model
+from runtime.model import load_parameters, prepare_wrapped_model, save_for_deployment
 from runtime.scripts import ScriptEnv
 
 from torch.ao.quantization import quantize_dynamic
@@ -43,7 +43,9 @@ def main_procedure(opts: argparse.Namespace):
   run_benchmark('fp32', model_fp32, bm_dataset)
   run_benchmark('int8', model_int8, bm_dataset)
 
-  # TODO: save the quantized model (int8)
+  # save the quantized model (int8)
+  example_inputs = [torch.randn(1, 3, 224, 224)]
+  save_for_deployment(model_int8, opts.int8, example_inputs)
 
 
 
@@ -51,7 +53,7 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser(description='post training dynamic quantization.')
 
   parser.add_argument('fp32', type=str, help='(src) fp32 model.')
-  # parser.add_argument('int8', type=str, help='(tgt) int8 model.')
+  parser.add_argument('int8', type=str, help='(tgt) int8 model.')
 
   parser.add_argument('--mode', choices=['eager', 'fx'], default='eager',
                       help='select mode for quantization: eager or fx.')

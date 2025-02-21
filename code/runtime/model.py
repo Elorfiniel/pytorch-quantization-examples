@@ -71,3 +71,19 @@ def save_parameters(model: nn.Module, ckpt_path: str):
 
   ckpt = dict(state_dict=model.state_dict())
   torch.save(ckpt, ckpt_path)
+
+
+def save_for_deployment(model: nn.Module, model_path: str, example_inputs: tuple):
+  '''Save model for deployment using torchscript.
+
+  Args:
+    `model`: model to be saved for deployment.
+    `model_path`: path to the model file.
+    `example_inputs`: example inputs for the model.
+
+  Note that this function assumes all possible control flows
+  in the model have been handled by `torch.jit.script`.
+  '''
+
+  script_module = torch.jit.trace(model, example_inputs)
+  torch.jit.save(script_module, model_path)
