@@ -1,8 +1,8 @@
 from mmengine.model import BaseModel
-from torchvision.models import resnet18
 
 import torch
 import torch.nn as nn
+import torchvision.models as models
 
 
 class ModelWrapper(BaseModel):
@@ -25,27 +25,31 @@ class ModelWrapper(BaseModel):
     return self.model
 
 
-def prepare_model(model_name: str):
+def prepare_model(model_name: str, quant: bool = False):
   '''Prepare model for training/testing/quantization.
 
   Args:
     `model_name`: name of the predefined model.
+    `quant`: whether to use quantized version.
   '''
 
   if model_name == 'resnet18':
-    return resnet18(num_classes=10, weights=None)
+    model = models.quantization.resnet18 if quant else models.resnet18
   else:
     raise NotImplementedError(f'model {model_name} not implemented.')
 
+  return model(num_classes=10, weights=None)
 
-def prepare_wrapped_model(model_name: str):
+
+def prepare_wrapped_model(model_name: str, quant: bool = False):
   '''Prepare wrapped model for training/testing/quantization.
 
   Args:
     `model_name`: name of the predefined model.
+    `quant`: whether to use quantized version.
   '''
 
-  return ModelWrapper(model=prepare_model(model_name))
+  return ModelWrapper(model=prepare_model(model_name, quant))
 
 
 def load_parameters(model: nn.Module, ckpt_path: str, map_location: str = 'cpu'):

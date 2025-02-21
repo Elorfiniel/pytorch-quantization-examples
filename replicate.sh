@@ -15,4 +15,13 @@ rm -r runs/model-fp32
 # example: post training dynamic quantization
 cd code
 python post-training-dynamic.py \
-  --mode eager resource/model-fp32-full-ckpt.pth resource/model-int8-ptq-de.pth
+  --mode eager resource/model-fp32-full-ckpt.pth \
+  resource/model-int8-ptq-d.pth
+
+# example: post training static quantization
+python post-training-static.py \
+  --batch-size 32 --n-samples 10000 \
+  --mode eager resource/model-fp32-full-ckpt.pth \
+  resource/model-int8-ptq-s.pth
+
+# example: quantization aware training
