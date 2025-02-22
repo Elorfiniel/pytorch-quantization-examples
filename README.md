@@ -40,3 +40,5 @@ Environment: Win10 22H2, Intel Core i5-10210U @ 1.60GHz 2.11GHz, 16GB RAM.
 - [PyTorch Static Quantization](https://leimao.github.io/blog/PyTorch-Static-Quantization/)
 
 - [PyTorch Quantization Aware Training](https://leimao.github.io/blog/PyTorch-Static-Quantization/)
+
+- [Quantization Tutorials by Oscar Savolainen](https://github.com/OscarSavolainen/Quantization-Tutorials)
