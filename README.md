@@ -4,13 +4,18 @@ This repository contains examples of model quantization in PyTorch.
 
 # Model Comparison
 
-The table below summarizes the results of model accuracy and inference time.
+The table below summarizes a benchmark of different types of models.
 
-| Model    | Dtype   |   Model Accuracy |   Inference Time |
-|----------|---------|------------------|------------------|
-| origin   | fp32    |           81.36% |          10.38ms |
-| ptq-d    | int8    |           81.36% |          10.77ms |
-| ptq-s    | int8    |           78.14% |           6.56ms |
+| Model    | Dtype   |   Model Accuracy |   Inference Time |   Parameter Size |
+|----------|---------|------------------|------------------|------------------|
+| origin   | fp32    |           81.36% |          ~8.15ms |          ~42.8Mb |
+| ptq-d    | int8    |           81.36% |          ~8.13ms |          ~42.8Mb |
+| ptq-s    | int8    |           78.14% |          ~2.42ms |          ~10.8Mb |
+| qat      | int8    |           78.85% |          ~2.45ms |          ~10.8Mb |
+
+Note: all results are measured with the torch JIT model on a single CPU core.
+
+Environment: Win10 22H2, Intel Core i5-10210U @ 1.60GHz 2.11GHz, 16GB RAM.
 
 # Recommended Reading
 
