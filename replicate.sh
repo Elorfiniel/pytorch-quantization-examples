@@ -25,3 +25,9 @@ python post-training-static.py \
   resource/model-int8-ptq-s.pth
 
 # example: quantization aware training
+python quant-aware-training.py \
+  --num-workers 8 --work-dir runs/model-int8 \
+  --mode eager resource/model-fp32-full-ckpt.pth \
+  resource/model-int8-qat.pth
+# clean up runs directory to save space
+rm -r runs/model-int8

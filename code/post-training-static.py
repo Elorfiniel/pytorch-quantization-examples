@@ -42,7 +42,7 @@ def ptq_static(mode: str, model_fp32: nn.Module, batch_size: int = 32, n_samples
     raise ValueError(f'quantization mode {mode} not unsupported.')
 
   if mode == 'eager':
-    model_fp32.eval() # fuse only supports eval mode
+    model_fp32.eval()   # for post training static quantization
     model_fp32.fuse_model()
 
     # set quantization configs for weights and activations, for default:
