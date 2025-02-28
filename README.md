@@ -4,7 +4,7 @@ This repository contains examples of model quantization in PyTorch.
 
 # Model Comparison
 
-The table below summarizes a benchmark of different types of models.
+The table below summarizes a benchmark of different types of models (based on ResNet-18).
 
 | Model    | Dtype   |   Model Accuracy |   Inference Time |   Parameter Size |
 |----------|---------|------------------|------------------|------------------|
@@ -16,6 +16,22 @@ The table below summarizes a benchmark of different types of models.
 Note: all results are measured with the torch JIT model on a single CPU core.
 
 Environment: Win10 22H2, Intel Core i5-10210U @ 1.60GHz 2.11GHz, 16GB RAM.
+
+# Replicate
+
+Please refer to the provided script `replicate.sh` if you want to get your hands dirty by training and quantizing from scratch. Note that you may end up with different accuracy and inference time, which depends on your hardware, the seed of the random number generators, the training hyperparameters, etc. For convenience, you can also start with the pretrained checkpoint of the fp32 model (see below).
+
+## Checkpoints
+
+You can download the full checkpoint of the fp32 model using these links:
+
+- Google Drive: [model-fp32-full-ckpt.zip](https://drive.google.com/file/d/1L64J5xsePj235QG8qAkvillBndMH71cU/view?usp=drive_link)
+- Baidu Netdisk: [model-fp32-full-ckpt.zip](https://pan.baidu.com/s/1UhDChDDER-G2HiI4jQwZjg?pwd=ani3)
+
+You can download the torch JIT models in the above table using these links:
+
+- Google Drive: [model-torch-jit.zip](https://drive.google.com/file/d/1_6nhsbaviwwRxwcYGMwwpWiy5-gaZQbK/view?usp=drive_link)
+- Baidu Netdisk: [model-torch-jit.zip](https://pan.baidu.com/s/1a2rSanSv9zy3Aw2q36dQXQ?pwd=yenq)
 
 # Recommended Reading
 
